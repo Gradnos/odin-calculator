@@ -1,4 +1,4 @@
-let previousNumber = 0;
+let previousNumber = null;
 let currentNumber = 0;
 let actionNumber
 let lastOperation;
@@ -22,8 +22,8 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach((key) => {
     key.addEventListener("click", (e) => {
         operation = e.target.getAttribute("data-key");
-        console.log(operation);
         if(operation === "=") {
+            if(previousNumber === null) return;
             let operated;
             if(!equalsLast) {
                 operated = operate(previousNumber,currentNumber, lastOperation);
@@ -45,9 +45,21 @@ operators.forEach((key) => {
 });
 
 
+const cKey = document.querySelector(".C");
+cKey.addEventListener("click", (e) =>{
+    setCurrentNumber(0);
+    setPreviousNumber(null);
+});
 
+const plusMinusKey = document.querySelector(".plus-minus");
+plusMinusKey.addEventListener("click", (e) =>{
+    setCurrentNumber(-currentNumber);
+});
 
-
+const percentKey = document.querySelector(".percent");
+percentKey.addEventListener("click", (e) =>{
+    setCurrentNumber(Number((currentNumber/100).toFixed(6)));
+});
 
 
 
@@ -117,7 +129,7 @@ function multiply(a,b){
 }
 
 function divide(a, b){
-    return a/b;
+    return Number((a/b).toFixed(6));
 }
 
 function subtract(a,b){

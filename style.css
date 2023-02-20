@@ -1,14 +1,17 @@
 :root{
     --dark : #1C1C1C;
     --mid : #505050;
+    --midbg : #3a3a3a;
     --light : #D4D4D2;
+    --lightbg : #969696;
     --orange : #FF9500;
+    --orangebg : #b36800;
 
 }
 
 *{
     font-family: 'Monda', sans-serif;
-    
+    user-select: none;
 }
 
 .symbolFont{
@@ -82,13 +85,25 @@ button{
     border-radius: 50%;
     font-size: 2rem;
     text-align: center;
+    transition: 0.1s;
+}
+
+button:hover{
+    scale: 1.05;
+    background-color: var(--midbg);
 }
 
 .bgLight{
     background-color: var(--light);
     color: black;
 }
+.bgLight:hover{
+    background-color: var(--lightbg);
+}
 
 .bgOrange{
     background-color: var(--orange);
+}
+.bgOrange:hover{
+    background-color: var(--orangebg);
 }

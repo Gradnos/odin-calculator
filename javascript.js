@@ -22,7 +22,9 @@ function operate(a,b, operation){
     return result;
 }
 
-console.log("AAA");
+
+
+
 
 function add(a,b){
     return a+b;

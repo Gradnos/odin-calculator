@@ -40,7 +40,29 @@ body{
 }
 
 .screen{
+    background-color: black;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    padding: 0 30px;
     grid-area: screen;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+p{
+    padding: 0px;
+    margin: 0px;
+    color: white;
+}
+
+.top{
+    color: var(--light);
+}
+
+.bottom{
+    font-size: 3rem;
 }
 
 .zero{

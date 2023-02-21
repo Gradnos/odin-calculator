@@ -20,6 +20,9 @@
 }
 
 body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: black;
     margin: 0;
     height: 100vh;
@@ -27,6 +30,20 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+a{
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    transition : 0.1s;
+}
+
+a:hover{
+    scale: 1.1;
+}
+
+
 
 .inline{
     display: inline;

@@ -3,18 +3,22 @@ let currentNumber = 0;
 let actionNumber
 let lastOperation;
 let equalsLast = false;
+let numberTyped = true;
 
 
 const bottomScreen = document.querySelector(".bottom");
 const topScreen = document.querySelector(".top");
+const topOperation = document.querySelector(".topOperation");
 
 
 const numberKeys = document.querySelectorAll(".num");
 numberKeys.forEach((key) =>{
     key.addEventListener("click", (e) =>{
+        if(equalsLast) clearCalculator();
         amount = +(e.target.getAttribute("data-key"));
-
         writeCurrentNumber(amount);
+        numberTyped = true;
+        equalsLast = false;
     });
 });
 
@@ -36,31 +40,50 @@ operators.forEach((key) => {
             equalsLast = true;
         }
         else{
-            setPreviousNumber(currentNumber);
-            setCurrentNumber(0);
+            if(equalsLast){
+                setPreviousNumber(currentNumber);
+                setCurrentNumber(0);
+            }
+            addOperationToScreen(operation);
+            if(!numberTyped || equalsLast) {
+                lastOperation = operation;
+                equalsLast = false;
+                return;
+            }
+            if(previousNumber === null || equalsLast === true){
+                setPreviousNumber(currentNumber);
+                setCurrentNumber(0);
+            }
+            else{
+                operated = operate(previousNumber,currentNumber, lastOperation);
+                setCurrentNumber(0);
+                setPreviousNumber(operated); 
+            }
             lastOperation = operation;
             equalsLast = false;
+
         }
+        numberTyped = false;
     });
 });
 
 
 const cKey = document.querySelector(".C");
 cKey.addEventListener("click", (e) =>{
-    setCurrentNumber(0);
-    setPreviousNumber(null);
+    clearCalculator();
 });
 
 const plusMinusKey = document.querySelector(".plus-minus");
 plusMinusKey.addEventListener("click", (e) =>{
     setCurrentNumber(-currentNumber);
+    numberTyped = false;
 });
 
 const percentKey = document.querySelector(".percent");
 percentKey.addEventListener("click", (e) =>{
     setCurrentNumber(Number((currentNumber/100).toFixed(6)));
+    numberTyped = false;
 });
-
 
 
 
@@ -90,11 +113,22 @@ function operate(a,b, operation){
 
         result = divide(a,b);
     }
-
+    
     console.log(result);
     return result;
 }
 
+
+function clearCalculator(){
+    setCurrentNumber(0);
+    setPreviousNumber(null);
+    addOperationToScreen(null);
+    numberTyped = false;
+}
+
+function addOperationToScreen(operaion){
+    topOperation.innerText=operaion;
+}
 
 function setPreviousNumber(a){
     previousNumber = a;
@@ -129,6 +163,7 @@ function multiply(a,b){
 }
 
 function divide(a, b){
+   // return (a/b);
     return Number((a/b).toFixed(6));
 }
 

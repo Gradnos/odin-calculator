@@ -10,6 +10,7 @@
 }
 
 *{
+    color:  white;
     font-family: 'Monda', sans-serif;
     user-select: none;
 }
@@ -27,6 +28,9 @@ body{
     align-items: center;
 }
 
+.inline{
+    display: inline;
+}
 
 .calculator{
     background-color: var(--dark);

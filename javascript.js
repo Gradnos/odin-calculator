@@ -4,11 +4,14 @@ let actionNumber
 let lastOperation;
 let equalsLast = false;
 let numberTyped = true;
+let dotcounter = 0;
+let withDot = false;
 
-
-const bottomScreen = document.querySelector(".bottom");
+const numberP = document.querySelector(".numberP");
 const topScreen = document.querySelector(".top");
 const topOperation = document.querySelector(".topOperation");
+const dotP = document.querySelector(".dotP");
+
 
 
 const numberKeys = document.querySelectorAll(".num");
@@ -26,6 +29,8 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach((key) => {
     key.addEventListener("click", (e) => {
         operation = e.target.getAttribute("data-key");
+        withDot = false;
+        dotcounter = 0;
         if(operation === "=") {
             if(previousNumber === null) return;
             let operated;
@@ -85,6 +90,15 @@ percentKey.addEventListener("click", (e) =>{
     numberTyped = false;
 });
 
+const dotKey = document.querySelector(".dot");
+dotKey.addEventListener("click", (e) =>{
+    if(!withDot && dotcounter === 0){
+        dotP.innerText = ".";
+        withDot = true;
+    }
+    numberTyped = false;
+});
+
 
 
 
@@ -141,7 +155,13 @@ function showPreviousNumber(){
 
 
 function writeCurrentNumber(a){
-    currentNumber = currentNumber * 10 + a;
+    currentNumber = currentNumber * (10 ** (dotcounter + 1)) + a;
+    if(withDot){
+        dotP.innerText = "";
+        dotcounter++;
+        currentNumber /= (10 ** dotcounter);
+    }
+    console.log(dotcounter);
     showCurrentNumber();
 }
 
@@ -151,15 +171,15 @@ function setCurrentNumber(a){
 }
 
 function showCurrentNumber(){
-    bottomScreen.innerText = currentNumber;
+    numberP.innerText = currentNumber;
 }
 
 function add(a,b){
-    return a+b;
+    return Number((a+b).toFixed(6));
 }
 
 function multiply(a,b){
-    return a*b;
+    return Number((a*b).toFixed(6));
 }
 
 function divide(a, b){
@@ -168,13 +188,13 @@ function divide(a, b){
 }
 
 function subtract(a,b){
-    return a-b;
+    return Number((a-b).toFixed(6));
 }
 
 function reverse(a){
-    return -a;
+    return Number((-a).toFixed(6));
 }
 
 function percent(a){
-    return a/100;
+    return Number((a/100).toFixed(6));
 }

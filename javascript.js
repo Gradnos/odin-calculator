@@ -137,6 +137,8 @@ function clearCalculator(){
     setCurrentNumber(0);
     setPreviousNumber(null);
     addOperationToScreen(null);
+    withDot=false;
+    dotcounter = 0;
     numberTyped = false;
 }
 

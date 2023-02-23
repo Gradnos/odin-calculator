@@ -127,9 +127,16 @@ function operate(a,b, operation){
 
         result = divide(a,b);
     }
+
+    let rounded = Number(result.toFixed(10));
+    if(rounded === 0){
+        console.log("))))0");
+        console.log(result);    
+        return result.toExponential(6);
+    }
     
     console.log(result);
-    return result;
+    return rounded;
 }
 
 
@@ -177,26 +184,26 @@ function showCurrentNumber(){
 }
 
 function add(a,b){
-    return Number((a+b).toFixed(6));
+    return a+b;
 }
 
 function multiply(a,b){
-    return Number((a*b).toFixed(6));
+    return a*b;
 }
 
 function divide(a, b){
    // return (a/b);
-    return Number((a/b).toFixed(6));
+    return a/b;
 }
 
 function subtract(a,b){
-    return Number((a-b).toFixed(6));
+    return a-b;
 }
 
 function reverse(a){
-    return Number((-a).toFixed(6));
+    return -a;
 }
 
 function percent(a){
-    return Number((a/100).toFixed(6));
+    return a/100;
 }
